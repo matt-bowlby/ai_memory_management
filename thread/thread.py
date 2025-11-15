@@ -21,14 +21,15 @@ class Thread:
         # internal booking-keeping fields
         self.last_run_time = None # useful on RR and SJF
 
-def is_finished (self): 
-    ''' 
-        Rerturns True if the thread has finished execution (no more burst time remaining) '''
-    return self.remaining <= 0 
+    def is_finished (self): 
+        ''' 
+            Rerturns True if the thread has finished execution (no more burst time remaining)
+        '''
+        return self.remaining <= 0 
 
-def Compute_metrics(self): 
-    '''
-        Computes turnaround time and waiting time for the thread after completion
-    '''
-    self.turnaround_time = self.completion_time - self.arrival
-    self.waiting_time = self.turnaround_time - self.burst
+    def Compute_metrics(self): 
+        '''
+            Computes turnaround time and waiting time for the thread after completion
+        '''
+        self.turnaround_time = self.completion_time - self.arrival
+        self.waiting_time = self.turnaround_time - self.burst
