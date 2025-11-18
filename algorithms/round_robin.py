@@ -12,10 +12,40 @@ class RR(Algorithm):
 
 	def tick(self, time_step: int) -> Thread | None:
 		'''
-		RR adds amew;y arrived threads to ready queue
+		RR adds newly arrived threads to ready queue
 		If active thread finsihed or quantum expired -> rotate
 		Run active thread for onw tick
 		'''
 		# Add newly arrived threads to ready queue
-		# for th in self.threads:
-		pass
+		for th in self.threads:
+			if th.arrival == time_step:
+				self.ready_queue.append(th)
+		
+		# If there is no active thread or it finished, get next thre from queue
+		if self.active_thread is None or self.active_thread.is_finished():
+			if self.active_thread and self.active_thread.is_finished():
+				pass # finished thread, do not re-add to queue
+			# picking next thread
+			if self.ready_queue:
+				self.active_thread = self.ready_queue.popleft()
+				self.time_used = 0
+			else:
+				return None
+			
+		# If quantum expired, rotate
+		if self.time_used >= self.quantum: 
+			# Put active thread back to queue if not finished
+			if not self.active_thread.is_finished():
+				self.ready_queue.append(self.active_thread)
+			# Pick next thread
+			if self.ready_queue:
+				self.active_thread = self.ready_queue.popleft()
+
+				
+			self.time_used = 0
+
+
+		# Run active thread for one tick
+		self.active_thread.tick(time_step)
+		self.time_used += 1
+		return self.active_thread
