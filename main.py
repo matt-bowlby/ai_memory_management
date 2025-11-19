@@ -2,6 +2,7 @@ from algorithms.first_come_first_serve import FCFS
 from algorithms.shortest_job_first import SJF
 from algorithms.priority import Priority
 from algorithms.round_robin import RR
+from algorithms.multilevel_queue import MultilevelQueue
 from dispatcher import Dispatcher
 from thread_file_loader import load_threads_from_file
 
@@ -17,8 +18,9 @@ def main():
 	#file_name = "RR_threads_test_case" # test case for Round Robin
 	#algorithm = FCFS([])
 	#algorithm = Priority([])
-	algorithm = SJF([])
+	#algorithm = SJF([])
 	#algorithm = RR([], quantum=2)
+	algorithm = MultilevelQueue([], quantum=2)
 	dispatcher = Dispatcher(load_threads_from_file(file_name), algorithm)
 
 	while True:
