@@ -13,7 +13,7 @@ def main():
 	next_tick = time.time() + tick_interval
 
 	file_name = "threads_test_cases.txt"
-	#file_name = "RR_threads_test_case" # Did not worked out (in the instructions it is a differnet type pof threads)
+	#file_name = "RR_threads_test_case" # test case for Round Robin
 	#algorithm = FCFS([])
 	algorithm = Priority([])
 	#algorithm = RR([], quantum=2)

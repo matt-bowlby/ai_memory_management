@@ -8,27 +8,28 @@ class Priority(Algorithm):
 
 	def tick(self, time_step: int) -> Thread | None:
 		'''
-		Non-preemptive Priority Scheduling Algorith
+		Preemptive Priority Scheduling Algorith
 		Pick the highest priority (lowest number) thread that has arrived
-		Run it to completion
+		If a new higher priority thread arrives, preempt the current active thread
 		'''
+		# Gather all thread that have arrived and not finished
+		available = [th for th in self.threads if th.arrival <= time_step and not th.is_finished()]
+		if not available: 
+			# no threads available to run this tick
+			self.active_thread = None
+			return None
+		
+		# Choose best thread based on proirity, then arrivak time
+		highest_priority_thread = min(available, key=lambda th: (th.priority, th.arrival))
 
-		# if no active thread or active has finished, pick next
-		if self.active_thread is None or self.active_thread.is_finished():
-			# if finished, do not re-add
-			if self.active_thread and self.active_thread.is_finished():
-				self.active_thread = None
-			
-			# Gather all threads that have arrived and not finished
-			available=[t for t in self.threads if t.arrival <= time_step and not t.is_finished()]
+		# Preempt if needed
+		if (self.active_thread is None or 
+		   self.active_thread.is_finished() or
+		   highest_priority_thread.priority < self.active_thread.priority):
+			self.active_thread = highest_priority_thread
 
-			if not available:
-				return None
-			
-			# Pick by priority first --> arrival time second
-			self.active_thread = min(available, key=lambda t: (t.priority, t.arrival))
-
-		# Run the active thread for one tick
+		# Run active thread for one tick
 		self.active_thread.tick(time_step)
 		return self.active_thread
+
 		
