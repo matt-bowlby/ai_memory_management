@@ -5,4 +5,4 @@ from .shortest_job_first import SJF
 from .priority import Priority
 from .multilevel_queue import MultilevelQueue
 
-__all__ = ['Algorithm', 'FCFS', 'RR', 'SJF', 'Priority', 'MultilevelQueue']
+__all__ = ['Algorithm', 'FCFS', 'RR', 'SJF', 'Priority', 'MultilevelQueue', 'PreemptiveSJF']
