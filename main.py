@@ -1,4 +1,5 @@
 from algorithms.first_come_first_serve import FCFS
+from algorithms.shortest_job_first import SJF
 from algorithms.priority import Priority
 from algorithms.round_robin import RR
 from dispatcher import Dispatcher
@@ -15,7 +16,8 @@ def main():
 	file_name = "threads_test_cases.txt"
 	#file_name = "RR_threads_test_case" # test case for Round Robin
 	#algorithm = FCFS([])
-	algorithm = Priority([])
+	#algorithm = Priority([])
+	algorithm = SJF([])
 	#algorithm = RR([], quantum=2)
 	dispatcher = Dispatcher(load_threads_from_file(file_name), algorithm)
 

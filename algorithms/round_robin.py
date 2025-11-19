@@ -2,6 +2,9 @@ from collections import deque
 from .algorithm import Algorithm
 from thread import Thread
 
+'''
+WE HAVE TO CHANGE IT A BIT SO THAT THE USER 
+CAN SPECIFY THE QUANTUM WHEN INITIALIZING THE RR ALGORITHM'''
 class RR(Algorithm):
 	def __init__(self, threads: list[Thread], quantum: int) -> None:
 		super().__init__(threads)
