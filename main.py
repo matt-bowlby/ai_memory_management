@@ -2,6 +2,7 @@ from algorithms.first_come_first_serve import FCFS
 from algorithms.shortest_job_first import SJF
 from algorithms.priority import Priority
 from algorithms.round_robin import RR
+from algorithms.preemptive_shortest_job_first import PreemptiveSJF
 from algorithms.multilevel_queue import MultilevelQueue
 from dispatcher import Dispatcher
 from thread_file_loader import load_threads_from_file
@@ -20,7 +21,8 @@ def main():
 	#algorithm = Priority([])
 	#algorithm = SJF([])
 	#algorithm = RR([], quantum=2)
-	algorithm = MultilevelQueue([], quantum=2)
+	algorithm = PreemptiveSJF([])
+	#algorithm = MultilevelQueue([], quantum=2)
 	dispatcher = Dispatcher(load_threads_from_file(file_name), algorithm)
 
 	while True:
