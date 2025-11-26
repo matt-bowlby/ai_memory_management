@@ -52,5 +52,5 @@ def print_metrics_table (metrics: dict, threads: list):
     print("\nAverages:")
     print(f"Average Waiting Time    : {metrics['average_waiting_time']: .2f}")
     print(f"Average Turnaround Time : {metrics['average_turnaround_time']: .2f}")
-    print(f"CPU Utilization         : {metrics['cpu_utilization']: .2f}%")
+    print(f"CPU Utilization         : {metrics['cpu_utilization']* 100: .2f}%")
     print("----------------------------------------\n")
