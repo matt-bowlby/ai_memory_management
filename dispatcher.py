@@ -22,6 +22,11 @@ class Dispatcher:
 		if current_thread:
 			print(f"Time {self.time_step}: Running Thread {current_thread.thread_id}")
 			self.gantt_chart.append((current_thread.thread_id, self.time_step))
+		else: 
+			# No thread ready at this time step, meaniong the CPU is idle
+			# Record an IDLE entre so that the Gantt char reflects empty CPOU time
+			print(f"Time {self.time_step}: CPU IDLE")
+			self.gantt_chart.append(("IDLE", self.time_step))
 
 		self.time_step += 1
 

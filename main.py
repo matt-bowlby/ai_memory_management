@@ -18,14 +18,14 @@ def main():
 	tick_interval = 1.0 / TICK_RATE
 	next_tick = time.time() + tick_interval
 
-	file_name = "threads_test_cases.txt"
-	#file_name = "RR_threads_test_case" # test case for Round Robin
+	#file_name = "threads_test_cases.txt"
+	file_name = "RR_threads_test_case" # test case for Round Robin
 
 	#algorithm = FCFS([])
 	#algorithm = Priority([])
 	#algorithm = SJF([])
-	#algorithm = RR([], quantum=2) # ARE WE PLANNING TO ASK TO THE USER FOR THR QUANTUM? 
-	algorithm = PreemptiveSJF([])
+	algorithm = RR([], quantum=2) # ARE WE PLANNING TO ASK TO THE USER FOR THR QUANTUM? 
+	#algorithm = PreemptiveSJF([])
 	#algorithm = MultilevelQueue([], quantum=2)ARE WE PLANNING TO ASK TO THE USER FOR THR QUANTUM?
 
 	dispatcher = Dispatcher(load_threads_from_file(file_name), algorithm)
@@ -45,12 +45,13 @@ def main():
 	print("\n---------- SIMULATION COMPLETE ----------")
 	print(f"Total Time: {total_time} ticks\n")
 
-	# Print Gantt Chart
+	# Print Metrics and Gantt Chart
+	metrics = calculate_metrics(dispatcher.threads, dispatcher.gantt_chart)
+	print_gantt_chart.threads = dispatcher.threads
 	print_gantt_chart(dispatcher.gantt_chart)
+	
+	print_metrics_table(metrics, dispatcher.threads)
 
-	# Print Metrics
-	metrics = calculate_metrics(dispatcher.threads, total_time)
-	print_gantt_chart(metrics, dispatcher.threads)
 
 if __name__ == "__main__":
 	main()
