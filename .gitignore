@@ -143,6 +143,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+thread_scheduling_simulator_venv/
 
 # Spyder project settings
 .spyderproject
