@@ -87,7 +87,7 @@ def print_metrics_table (metrics: dict, threads: list):
     Metrics come from mentrics.py'''
 
     print("\n------------------- METRICS SUMMARY -------------------")
-    print(f"{'Thread':<10}{'Arrive':<10}{'Burst':<10}{'Finish':<10}{'Waitign':<10}{'Turnaround':<12}")
+    print(f"{'Thread':<10}{'Arrive':<10}{'Burst':<10}{'Finish':<10}{'Waiting':<10}{'Turnaround':<12}")
 
     for th in threads:
         print(f"{th.thread_id:<10}{th.arrival:<10}{th.burst:<10}{th.completion_time:<10}{th.waiting_time:<10}{th.turnaround_time:<12}")
