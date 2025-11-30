@@ -1,5 +1,9 @@
 import plotly.figure_factory as ff
 import pandas as pd
+import random
+
+def random_color():
+    return "#{:06x}".format(random.randint(0, 0xFFFFFF))
 
 def display_gantt_chart(gantt_data: list[tuple[str, int]]):
     '''
@@ -26,7 +30,7 @@ def display_gantt_chart(gantt_data: list[tuple[str, int]]):
     last_time = gantt_data[-1][1] + 1
     merged.append(dict(Task=current_thread, Start=start_time, Finish=last_time))
 
-    print(merged)
+    merged = [num for num in merged if num['Task'] != 'IDLE']  # Remove IDLE periods
 
     # Convert to DataFrame
     df = pd.DataFrame(merged)
@@ -37,49 +41,15 @@ def display_gantt_chart(gantt_data: list[tuple[str, int]]):
         print(f"Error converting columns to numeric: {e}")
         return # Stop execution if data conversion fails
 
-    fig = ff.create_gantt(df, index_col='Task', bar_width=0.4, show_colorbar=True)
+
+    unique_tasks = df['Task'].unique()
+    # Assign a random color to every unique task
+    thread_colors = {task: random_color() for task in unique_tasks}
+
+    fig = ff.create_gantt(df, index_col='Task', bar_width=0.4, show_colorbar=True, colors=thread_colors, group_tasks=True)
     fig.update_layout(xaxis_type='linear')
     fig.show()
 
-
-    # Execution summary per thread
-    # executed_totals = {}
-
-
-
-    # # print the merge blocks
-    # for thread, start, end in merged:
-    #     if thread != "IDLE" :
-    #         duration = end- start
-    #         executed_totals[thread] = executed_totals.get(thread,0) + duration
-
-    # # Determining full busrts sizes
-    # global_threads = {th.thread_id: th for th in getattr(display_gantt_chart, "threads", [])}
-
-    # # running execution so far per thread
-    # running_exec = {th: 0 for th in executed_totals}
-
-    # # Print merged blocks with status
-    # for thread, start, end in merged:
-    #     duration = end - start
-
-    #     if thread == "IDLE":
-    #         print(f"[{start:02d} - {end:02d}] CPU IDLE ({duration} unit)")
-    #         continue
-
-    #     total_burst = global_threads[thread].burst
-    #     # update running executed after thius block
-    #     running_exec[thread] += duration
-    #     remaining_after = total_burst - running_exec[thread]
-
-    #     if remaining_after == 0:
-    #         status = "finished"
-    #     else:
-    #         status = f"remaining: {remaining_after}"
-
-    #     print(f"[{start:02d} - {end:02d}] {thread:<5} ran ({duration} units, {status})")
-
-    # print("--------------------------------------------------\n")
 
 def print_metrics_table (metrics: dict, threads: list):
     '''

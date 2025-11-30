@@ -5,7 +5,7 @@ def generate_threads(
 	num_threads: int,
 	max_arrival_time: int = 100,
 	burst_time_range: tuple[int, int] = (1, 10),
-	priority_range: tuple[int, int] = (1, 10),
+	priority_range: tuple[int, int] = (0, 10),
 ) -> list[Thread]:
 	threads = []
 	for i in range(num_threads):

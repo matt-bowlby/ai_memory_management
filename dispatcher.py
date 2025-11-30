@@ -7,7 +7,7 @@ class Dispatcher:
 		self.time_step: int = 0
 		self.threads: list[Thread] = threads
 		self.algorithm: Algorithm = algorithm
-		self.gantt_chart: list[dict] = [] # store dicts representing who ran at each time unit
+		self.gantt_chart: list[tuple[str, int]] = [] # store tuples representing who ran at each time unit
 
 	def add_thread(self, thread: Thread):
 		self.threads.append(thread)
