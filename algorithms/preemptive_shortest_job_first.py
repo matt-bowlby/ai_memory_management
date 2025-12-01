@@ -11,16 +11,16 @@ class PreemptiveSJF(Algorithm):
         # Gather all arrived and not finished threads
 		available = [th for th in threads if th.arrival <= time_step and not th.is_finished()]
 		if not available:
-			return None # not thread available
+			return None # no thread available
 
-        # Pick the thread with the shortest remianing time
+        # Pick the thread with the shortest remaining time
 		shortest = min(available, key=lambda th: (th.remaining, th.arrival))
 
         # Preemption check:
 		if (
 			self.active_thread is None
 			or self.active_thread.is_finished()
-			or self.active_thread != shortest
+			or self.active_thread is not shortest
         ):
 			self.active_thread = shortest
 

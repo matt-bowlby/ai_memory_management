@@ -44,7 +44,6 @@ class Thread:
         self.waiting_time = -1
         self.turnaround_time = -1
         self.last_run_time = -1
-        self.last_start_time = -1
 
     def tick(self, time_step: int) -> None:
         self.remaining -= 1
