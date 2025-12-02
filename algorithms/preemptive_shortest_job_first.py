@@ -8,6 +8,7 @@ class PreemptiveSJF(Algorithm):
         Preemptive Shortest Job First
         Always select a thread with the shortest remaining time.
         Preempts the currently running thread if a shorter one arrives.
+        Prints a message when a preemption occurs.
         """
         # Gather all arrived, non-finished threads
         available = [
@@ -25,6 +26,8 @@ class PreemptiveSJF(Algorithm):
             or self.active_thread.is_finished()
             or self.active_thread is not shortest
         ):
+            if self.active_thread is not None:
+                print(f"Preempting {self.active_thread.thread_id} for {shortest.thread_id}")
             self.active_thread = shortest
 
         # Tick active thread
